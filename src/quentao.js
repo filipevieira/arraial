@@ -246,14 +246,18 @@ export function initQuentaoGame(container) {
     // HUD Background
     ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
     ctx.beginPath();
-    ctx.roundRect(canvas.width - 160, 15, 145, 40, 8);
+    ctx.roundRect(canvas.width - 190, 15, 175, 40, 8);
     ctx.fill();
     
     // HUD Text
     ctx.fillStyle = '#fff';
-    ctx.font = 'bold 24px Outfit, sans-serif';
+    ctx.font = 'bold 22px Outfit, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(`Tempo:`, canvas.width - 180, 43);
+    
+    ctx.font = 'bold 22px "Courier New", monospace';
     ctx.textAlign = 'right';
-    ctx.fillText(`Tempo: ${(score/60).toFixed(3)}s`, canvas.width - 25, 43);
+    ctx.fillText(`${(score/60).toFixed(3)}s`, canvas.width - 25, 43);
     
     if (showInstructions) {
       ctx.fillStyle = 'rgba(0,0,0,0.85)';
