@@ -253,7 +253,7 @@ export function initQuentaoGame(container) {
     ctx.fillStyle = '#fff';
     ctx.font = 'bold 24px Outfit, sans-serif';
     ctx.textAlign = 'right';
-    ctx.fillText(`Tempo: ${Math.floor(score/60)}s`, canvas.width - 25, 43);
+    ctx.fillText(`Tempo: ${(score/60).toFixed(3)}s`, canvas.width - 25, 43);
     
     if (showInstructions) {
       ctx.fillStyle = 'rgba(0,0,0,0.85)';
@@ -283,14 +283,15 @@ export function initQuentaoGame(container) {
       
       ctx.fillStyle = '#fefae0';
       ctx.font = '22px Outfit, sans-serif';
-      const finalScore = Math.floor(score/60);
-      ctx.fillText(`Você equilibrou por ${finalScore} segundos.`, canvas.width / 2, canvas.height / 2 + 10);
+      const finalScore = Number((score/60).toFixed(3));
+      ctx.fillText(`Você equilibrou por ${finalScore.toFixed(3)} segundos.`, canvas.width / 2, canvas.height / 2 + 10);
       
       saveScore('quentao', finalScore);
       const hs = getHighScore('quentao');
-      ctx.fillStyle = '#ff006e';
-      ctx.font = '20px "Outfit", sans-serif';
-      ctx.fillText(`Recorde: ${hs} segundos`, canvas.width / 2, canvas.height / 2 + 40);
+      
+      ctx.fillStyle = "#ffb703";
+      ctx.font = "bold 16px 'Courier New'";
+      ctx.fillText(`Recorde: ${Number(hs).toFixed(3)} segundos`, canvas.width / 2, canvas.height / 2 + 40);
 
       ctx.fillStyle = '#ffb703';
       ctx.font = 'bold 20px Outfit, sans-serif';
