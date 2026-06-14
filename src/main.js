@@ -27,7 +27,7 @@ export function renderHub() {
         ${Array(15).fill('<div class="flag"></div>').join('')}
       </div>
       
-      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 650px; padding: 0 20px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 650px; padding: 0 20px; margin-top: 45px;">
         <h1 id="hub-title">${t('hub.title')}</h1>
         <button id="btn-about" style="background: none; border: none; font-size: 2rem; cursor: pointer; transition: transform 0.2s;" title="Sobre o Projeto">ℹ️</button>
       </div>
@@ -204,11 +204,24 @@ export function renderHub() {
     });
     
     // Atualizar textos do Hub
-    document.getElementById('hub-title').innerText = t('hub.title');
-    document.getElementById('txt-btn-ranking').innerText = t('hub.btnRanking');
-    document.getElementById('txt-btn-runner').innerText = t('hub.btnRunner');
-    document.getElementById('txt-btn-pamonha').innerText = t('hub.btnPamonha');
-    document.getElementById('txt-btn-quentao').innerText = t('hub.btnQuentao');
+    document.title = t('hub.title');
+    const hubTitle = document.getElementById('hub-title');
+    if (hubTitle) hubTitle.innerText = t('hub.title');
+    
+    const btnRanking = document.getElementById('txt-btn-ranking');
+    if (btnRanking) btnRanking.innerText = t('hub.btnRanking');
+    
+    const btnRunner = document.getElementById('txt-btn-runner');
+    if (btnRunner) btnRunner.innerText = t('hub.btnRunner');
+    
+    const btnPamonha = document.getElementById('txt-btn-pamonha');
+    if (btnPamonha) btnPamonha.innerText = t('hub.btnPamonha');
+    
+    const btnQuentao = document.getElementById('txt-btn-quentao');
+    if (btnQuentao) btnQuentao.innerText = t('hub.btnQuentao');
+    
+    const btnBack = document.getElementById('btn-back');
+    if (btnBack) btnBack.innerText = t('hub.btnBack');
     
     if (rankingModal.classList.contains('active')) {
       document.getElementById('ranking-title').innerText = t('ranking.title');
@@ -395,7 +408,7 @@ function renderMinigamePulaFogueira() {
     <div class="minigame-scene active">
       <div class="top-bar">
         <h2>🔥 Pula Fogueira Runner</h2>
-        <button class="back-btn" id="btn-back">⬅ Voltar ao Arraial</button>
+        <button class="back-btn" id="btn-back">${t('hub.btnBack')}</button>
       </div>
       <canvas id="gameCanvas"></canvas>
     </div>
@@ -415,7 +428,7 @@ function renderMinigamePamonha() {
     <div class="minigame-scene active">
       <div class="top-bar">
         <h2>🌽 Ralador de Pamonha</h2>
-        <button class="back-btn" id="btn-back">⬅ Voltar ao Arraial</button>
+        <button class="back-btn" id="btn-back">${t('hub.btnBack')}</button>
       </div>
       <div id="pamonha-game-container" style="width: 100%; height: calc(100vh - 60px); display: flex; justify-content: center; align-items: center; position: relative;"></div>
     </div>
@@ -435,7 +448,7 @@ function renderMinigameQuentao() {
     <div class="minigame-scene active">
       <div class="top-bar">
         <h2>🍷 Servir Quentão</h2>
-        <button class="back-btn" id="btn-back">⬅ Voltar ao Arraial</button>
+        <button class="back-btn" id="btn-back">${t('hub.btnBack')}</button>
       </div>
       <div id="quentao-container" style="display: flex; justify-content: center; align-items: center; width: 100%; height: calc(100vh - 60px);"></div>
     </div>
