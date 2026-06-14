@@ -193,8 +193,12 @@ export function renderHub() {
   const langSwitcher = document.createElement('div');
   langSwitcher.className = 'lang-switcher';
   langSwitcher.innerHTML = `
-    <button class="lang-btn" data-lang="pt" title="Português">🇧🇷</button>
-    <button class="lang-btn" data-lang="en" title="English">🇺🇸</button>
+    <button class="lang-btn" data-lang="pt" title="Português" style="display: flex; align-items: center; justify-content: center;">
+      <img src="https://flagcdn.com/w40/br.png" alt="BR" style="width: 24px; height: auto; pointer-events: none; border-radius: 2px;" />
+    </button>
+    <button class="lang-btn" data-lang="en" title="English" style="display: flex; align-items: center; justify-content: center;">
+      <img src="https://flagcdn.com/w40/us.png" alt="US" style="width: 24px; height: auto; pointer-events: none; border-radius: 2px;" />
+    </button>
   `;
   appContainer.appendChild(langSwitcher);
 
