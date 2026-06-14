@@ -1,7 +1,6 @@
 // i18n.js - Módulo de Internacionalização
 
 const translations = {
-const translations = {
   pt: {
     'hub.title': 'Arraial do Solstício',
     'hub.aboutTitle': 'Por que "Arraial do Solstício"?',
