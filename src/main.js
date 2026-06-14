@@ -223,6 +223,14 @@ export function renderHub() {
     const btnBack = document.getElementById('btn-back');
     if (btnBack) btnBack.innerText = t('hub.btnBack');
     
+    const gameTitleBar = document.getElementById('game-title-bar');
+    if (gameTitleBar) {
+      const gameId = gameTitleBar.dataset.gameId;
+      if (gameId === 'runner') gameTitleBar.innerText = t('gameTitle.runner');
+      if (gameId === 'pamonha') gameTitleBar.innerText = t('gameTitle.pamonha');
+      if (gameId === 'quentao') gameTitleBar.innerText = t('gameTitle.quentao');
+    }
+    
     if (rankingModal.classList.contains('active')) {
       document.getElementById('ranking-title').innerText = t('ranking.title');
       renderRanking();
@@ -407,7 +415,7 @@ function renderMinigamePulaFogueira() {
   app.innerHTML = `
     <div class="minigame-scene active">
       <div class="top-bar">
-        <h2>🔥 Pula Fogueira Runner</h2>
+        <h2 id="game-title-bar" data-game-id="runner">${t('gameTitle.runner')}</h2>
         <button class="back-btn" id="btn-back">${t('hub.btnBack')}</button>
       </div>
       <canvas id="gameCanvas"></canvas>
@@ -427,7 +435,7 @@ function renderMinigamePamonha() {
   app.innerHTML = `
     <div class="minigame-scene active">
       <div class="top-bar">
-        <h2>🌽 Ralador de Pamonha</h2>
+        <h2 id="game-title-bar" data-game-id="pamonha">${t('gameTitle.pamonha')}</h2>
         <button class="back-btn" id="btn-back">${t('hub.btnBack')}</button>
       </div>
       <div id="pamonha-game-container" style="width: 100%; height: calc(100vh - 60px); display: flex; justify-content: center; align-items: center; position: relative;"></div>
@@ -447,7 +455,7 @@ function renderMinigameQuentao() {
   app.innerHTML = `
     <div class="minigame-scene active">
       <div class="top-bar">
-        <h2>🍷 Servir Quentão</h2>
+        <h2 id="game-title-bar" data-game-id="quentao">${t('gameTitle.quentao')}</h2>
         <button class="back-btn" id="btn-back">${t('hub.btnBack')}</button>
       </div>
       <div id="quentao-container" style="display: flex; justify-content: center; align-items: center; width: 100%; height: calc(100vh - 60px);"></div>
