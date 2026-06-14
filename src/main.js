@@ -111,7 +111,7 @@ export function renderHub() {
       <div class="modal-overlay" id="ranking-modal">
         <div class="modal-content ranking-content">
           <button class="modal-close" id="ranking-close-btn">✖</button>
-          <h2 style="font-family: 'Bungee', sans-serif; color: #ffca3a; text-align: center; margin-bottom: 5px;">🏆 Quadro de Medalhas</h2>
+          <h2 id="ranking-title" style="font-family: 'Bungee', sans-serif; color: #ffca3a; text-align: center; margin-bottom: 5px;">🏆 Quadro de Medalhas</h2>
           <div class="ranking-grid" id="ranking-grid">
             <!-- Renderizado via JS -->
           </div>
