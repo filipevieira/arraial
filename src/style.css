@@ -743,7 +743,32 @@ canvas {
 }
 .empty-ranking {
   text-align: center;
-  font-family: 'Outfit', sans-serif;
-  color: #aaa;
+  color: rgba(255,255,255,0.5);
   font-style: italic;
+}
+
+/* --- LANGUAGE SWITCHER --- */
+.lang-switcher {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+  z-index: 100;
+}
+.lang-btn {
+  background: rgba(0,0,0,0.5);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.lang-btn:hover {
+  transform: scale(1.1);
+}
+.lang-btn.active {
+  border-color: #ffb703;
+  background: rgba(255, 183, 3, 0.2);
 }

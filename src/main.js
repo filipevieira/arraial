@@ -4,6 +4,9 @@ import { initPamonhaGame } from './pamonha.js';
 import { initQuentaoGame } from './quentao.js';
 import { createPersonSvg } from './graphics.js';
 import { getTopScores } from './ranking.js';
+import { initLang, setLang, getLang, t } from './i18n.js';
+
+initLang();
 
 // Referência ao container principal
 const app = document.querySelector('#app');
@@ -25,26 +28,22 @@ export function renderHub() {
       </div>
       
       <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 650px; padding: 0 20px;">
-        <h1>Arraial do Solstício</h1>
+        <h1 id="hub-title">${t('hub.title')}</h1>
         <button id="btn-about" style="background: none; border: none; font-size: 2rem; cursor: pointer; transition: transform 0.2s;" title="Sobre o Projeto">ℹ️</button>
       </div>
       
       <div class="barracas-container" style="flex-wrap: wrap; justify-content: center; max-width: 650px; gap: 1rem; z-index: 20;">
         <button class="barraca-btn" id="btn-ranking" style="background: #ffb703; color: #1a0f2e; border: 3px solid #fb5607; box-shadow: 0 4px #d00000;">
-          <span>🏆</span>
-          Ranking
-        </button>
-        <button class="barraca-btn" id="btn-pamonha">
-          <span>🌽</span>
-          Pamonha
-        </button>
-        <button class="barraca-btn" id="btn-quentao">
-          <span>🍷</span>
-          Quentão
+          <span class="barraca-icon">🏆</span> <span id="txt-btn-ranking">${t('hub.btnRanking')}</span>
         </button>
         <button class="barraca-btn" id="btn-runner">
-          <span>🔥</span>
-          Pula Fogueira
+          <span class="barraca-icon">🔥</span> <span id="txt-btn-runner">${t('hub.btnRunner')}</span>
+        </button>
+        <button class="barraca-btn" id="btn-pamonha">
+          <span class="barraca-icon">🌽</span> <span id="txt-btn-pamonha">${t('hub.btnPamonha')}</span>
+        </button>
+        <button class="barraca-btn" id="btn-quentao">
+          <span class="barraca-icon">🍷</span> <span id="txt-btn-quentao">${t('hub.btnQuentao')}</span>
         </button>
       </div>
 
@@ -129,11 +128,11 @@ export function renderHub() {
   const rankingModal = document.getElementById('ranking-modal');
   const rankingGrid = document.getElementById('ranking-grid');
   
-  document.getElementById('btn-ranking').addEventListener('click', () => {
+  const renderRanking = () => {
     const games = [
-      { id: 'runner', title: '🔥 Pula Fogueira', suffix: 'pts' },
-      { id: 'pamonha', title: '🌽 Pamonha', suffix: 'unid.' },
-      { id: 'quentao', title: '🍷 Quentão', suffix: 'seg.' }
+      { id: 'runner', title: t('game.runner'), suffix: t('suffix.runner') },
+      { id: 'pamonha', title: t('game.pamonha'), suffix: t('suffix.pamonha') },
+      { id: 'quentao', title: t('game.quentao'), suffix: t('suffix.quentao') }
     ];
     
     rankingGrid.innerHTML = '';
@@ -144,11 +143,11 @@ export function renderHub() {
       let listHtml = '';
       
       if (scores.length === 0) {
-        listHtml = '<div class="empty-ranking">Ainda não jogou</div>';
+        listHtml = `<div class="empty-ranking">${t('ranking.empty')}</div>`;
       } else {
         scores.forEach((s, i) => {
           const displayScore = game.id === 'quentao' ? Number(s).toFixed(3) : s;
-          listHtml += `<li><span><span class="ranking-medal">${medals[i]||'🏅'}</span> ${i+1}º Lugar</span> <span class="ranking-score">${displayScore} ${game.suffix}</span></li>`;
+          listHtml += `<li><span><span class="ranking-medal">${medals[i]||'🏅'}</span> ${i+1}${t('ranking.place')}</span> <span class="ranking-score">${displayScore} ${game.suffix}</span></li>`;
         });
         listHtml += '</ul>';
       }
@@ -160,7 +159,11 @@ export function renderHub() {
         </div>
       `;
     });
-    
+  };
+
+  document.getElementById('btn-ranking').addEventListener('click', () => {
+    document.getElementById('ranking-title').innerText = t('ranking.title');
+    renderRanking();
     rankingModal.classList.add('active');
   });
 
@@ -175,15 +178,53 @@ export function renderHub() {
   
   // Lógica do Modal de Sobre
   document.getElementById('btn-about').addEventListener('click', () => {
-    modalTitle.innerText = "Por que 'Arraial do Solstício'?";
+    modalTitle.innerText = t('hub.aboutTitle');
     modalText.innerHTML = `
-      <p style="margin-bottom: 10px;">O tema da Game Jam é <strong>"June Solstice"</strong> (Solstício de Junho). No Brasil, essa mesma época astronômica marca a chegada do inverno e é celebrada com a nossa tradicional <strong>Festa Junina</strong>!</p>
-      <p style="margin-bottom: 10px;">Por isso, o <em>Arraial do Solstício</em> une o tema global do evento com a nossa cultura local, através de minigames feitos com Vanilla JS e muito carinho.</p>
-      <p style="font-size: 0.9rem; color: #ffb703; text-align: center; margin-top: 20px;">Desenvolvido para a DEV Challenge</p>
+      <p style="margin-bottom: 10px;">${t('hub.aboutDesc1')}</p>
+      <p style="margin-bottom: 10px;">${t('hub.aboutDesc2')}</p>
+      <p style="font-size: 0.9rem; color: #ffb703; text-align: center; margin-top: 20px;">${t('hub.aboutFooter')}</p>
     `;
     modal.classList.add('active');
   });
 
+  // Language Switcher Injector
+  const appContainer = document.getElementById('app');
+  const langSwitcher = document.createElement('div');
+  langSwitcher.className = 'lang-switcher';
+  langSwitcher.innerHTML = `
+    <button class="lang-btn" data-lang="pt" title="Português">🇧🇷</button>
+    <button class="lang-btn" data-lang="en" title="English">🇺🇸</button>
+  `;
+  appContainer.appendChild(langSwitcher);
+
+  const updateLangUI = () => {
+    const current = getLang();
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === current);
+    });
+    
+    // Atualizar textos do Hub
+    document.getElementById('hub-title').innerText = t('hub.title');
+    document.getElementById('txt-btn-ranking').innerText = t('hub.btnRanking');
+    document.getElementById('txt-btn-runner').innerText = t('hub.btnRunner');
+    document.getElementById('txt-btn-pamonha').innerText = t('hub.btnPamonha');
+    document.getElementById('txt-btn-quentao').innerText = t('hub.btnQuentao');
+    
+    if (rankingModal.classList.contains('active')) {
+      document.getElementById('ranking-title').innerText = t('ranking.title');
+      renderRanking();
+    }
+  };
+
+  langSwitcher.addEventListener('click', (e) => {
+    if (e.target.classList.contains('lang-btn')) {
+      setLang(e.target.dataset.lang);
+    }
+  });
+
+  window.addEventListener('languageChanged', updateLangUI);
+  updateLangUI(); // Call once to set correct state
+  
   document.querySelectorAll('.info-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       modalTitle.innerText = btn.dataset.title;

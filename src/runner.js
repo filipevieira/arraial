@@ -1,5 +1,6 @@
 import { createPersonSvg } from './graphics.js';
 import { saveScore, getHighScore } from './ranking.js';
+import { t } from './i18n.js';
 
 export function initRunnerGame(canvas) {
   const ctx = canvas.getContext('2d');
@@ -420,14 +421,16 @@ export function initRunnerGame(canvas) {
       }
     });
 
-    ctx.fillStyle = '#ffffff';
-    ctx.font = 'bold 24px Outfit, sans-serif';
+    // Score
+    ctx.fillStyle = '#000';
+    ctx.font = 'bold 20px Outfit, sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText("Pontos: " + score, 20, 40);
+    ctx.fillText(t('runner.scorePrefix') + score, 20, 40);
     
+    // Invincible
     if (player.invincibleTimer > 0) {
-      ctx.fillStyle = '#ffba08';
-      ctx.fillText("✨ INVENCÍVEL!", 20, 70);
+      ctx.fillStyle = '#ffb703';
+      ctx.fillText(t('runner.invincible'), 20, 70);
     }
 
     if (showInstructions) {
@@ -435,40 +438,40 @@ export function initRunnerGame(canvas) {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       ctx.fillStyle = '#ffb703';
+      ctx.font = 'bold 36px "Bungee", sans-serif';
       ctx.textAlign = 'center';
-      ctx.font = 'bold 32px "Bungee", sans-serif';
-      ctx.fillText("PULA FOGUEIRA", canvas.width / 2, canvas.height / 2 - 40);
+      ctx.fillText(t('runner.title'), canvas.width / 2, canvas.height / 2 - 40);
       
-      ctx.fillStyle = '#fefae0';
+      ctx.fillStyle = '#fff';
       ctx.font = '20px Outfit, sans-serif';
-      ctx.fillText("Pressione ESPAÇO, SETA PARA CIMA", canvas.width / 2, canvas.height / 2);
-      ctx.fillText("ou toque na tela para pular!", canvas.width / 2, canvas.height / 2 + 30);
+      ctx.fillText(t('runner.desc1'), canvas.width / 2, canvas.height / 2);
+      ctx.fillText(t('runner.desc2'), canvas.width / 2, canvas.height / 2 + 30);
       
       ctx.fillStyle = '#ff006e';
-      ctx.font = 'bold 22px Outfit, sans-serif';
-      ctx.fillText("👆 Clique para começar!", canvas.width / 2, canvas.height / 2 + 90);
+      ctx.font = 'bold 24px Outfit, sans-serif';
+      ctx.fillText(t('runner.clickStart'), canvas.width / 2, canvas.height / 2 + 90);
     } else if (isGameOver) {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.85)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      ctx.fillStyle = '#e63946';
+      ctx.fillStyle = '#fb5607';
+      ctx.font = 'bold 36px "Bungee", sans-serif';
       ctx.textAlign = 'center';
-      ctx.font = 'bold 32px "Bungee", sans-serif';
-      ctx.fillText("VIXE, VOCÊ CAIU!", canvas.width / 2, canvas.height / 2 - 30);
+      ctx.fillText(t('runner.overTitle'), canvas.width / 2, canvas.height / 2 - 30);
       
-      ctx.fillStyle = '#fefae0';
-      ctx.font = '22px Outfit, sans-serif';
-      ctx.fillText(`Você fez ${score} pontos.`, canvas.width / 2, canvas.height / 2 + 10);
+      ctx.fillStyle = '#fff';
+      ctx.font = '24px Outfit, sans-serif';
+      ctx.fillText(t('runner.overResult', {X: score}), canvas.width / 2, canvas.height / 2 + 10);
       
       saveScore('runner', score);
       const hs = getHighScore('runner');
-      ctx.fillStyle = '#ff006e';
-      ctx.font = '20px "Outfit", sans-serif';
-      ctx.fillText(`Recorde Atual: ${hs} pontos`, canvas.width / 2, canvas.height / 2 + 40);
-
-      ctx.fillStyle = '#ffbe0b';
-      ctx.font = '24px "Outfit", sans-serif';
-      ctx.fillText('👆 Clique para tentar de novo', canvas.width / 2, canvas.height / 2 + 80);
+      ctx.fillStyle = '#ffb703';
+      ctx.font = 'bold 20px "Courier New"';
+      ctx.fillText(t('runner.overRecord', {X: hs}), canvas.width / 2, canvas.height / 2 + 40);
+      
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 20px Outfit, sans-serif';
+      ctx.fillText(t('runner.clickRetry'), canvas.width / 2, canvas.height / 2 + 80);
     }
   }
 

@@ -1,6 +1,7 @@
 import { createPersonSvg } from './graphics.js';
 
 import { saveScore, getHighScore } from './ranking.js';
+import { t } from './i18n.js';
 
 export function initQuentaoGame(container) {
   const canvas = document.createElement('canvas');
@@ -169,10 +170,10 @@ export function initQuentaoGame(container) {
     ctx.globalAlpha = 1.0;
 
     // Debug do Acelerômetro
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.6)';
-    ctx.font = '12px sans-serif';
+    ctx.fillStyle = '#fff';
     ctx.textAlign = 'left';
-    ctx.fillText('Inclinação: ' + (userTilt * 100).toFixed(0) + '%', 10, 20);
+    ctx.font = '14px Outfit, sans-serif';
+    ctx.fillText(t('quentao.hudAngle') + (userTilt * 100).toFixed(0) + '%', 10, 20);
 
     // Bandeirinhas
     const cores = ['#ff006e', '#8338ec', '#3a86ff', '#fb5607', '#ffbe0b'];
@@ -253,7 +254,7 @@ export function initQuentaoGame(container) {
     ctx.fillStyle = '#fff';
     ctx.font = 'bold 22px Outfit, sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText(`Tempo:`, canvas.width - 180, 43);
+    ctx.fillText(t('quentao.scorePrefix'), canvas.width - 180, 43);
     
     ctx.font = 'bold 22px "Courier New", monospace';
     ctx.textAlign = 'right';
@@ -266,40 +267,40 @@ export function initQuentaoGame(container) {
       ctx.fillStyle = '#ffb703';
       ctx.textAlign = 'center';
       ctx.font = 'bold 32px "Bungee", sans-serif';
-      ctx.fillText("QUENTÃO EQUILIBRISTA", canvas.width / 2, canvas.height / 2 - 40);
+      ctx.fillText(t('quentao.title'), canvas.width / 2, canvas.height / 2 - 40);
       
-      ctx.fillStyle = '#fefae0';
+      ctx.fillStyle = '#fff';
       ctx.font = '20px Outfit, sans-serif';
-      ctx.fillText("Mova o mouse ou incline o celular", canvas.width / 2, canvas.height / 2);
-      ctx.fillText("para não deixar o copo cair!", canvas.width / 2, canvas.height / 2 + 30);
+      ctx.fillText(t('quentao.desc1'), canvas.width / 2, canvas.height / 2);
+      ctx.fillText(t('quentao.desc2'), canvas.width / 2, canvas.height / 2 + 30);
       
       ctx.fillStyle = '#ff006e';
-      ctx.font = 'bold 22px Outfit, sans-serif';
-      ctx.fillText("👆 Clique para começar!", canvas.width / 2, canvas.height / 2 + 90);
+      ctx.font = 'bold 24px Outfit, sans-serif';
+      ctx.fillText(t('quentao.clickStart'), canvas.width / 2, canvas.height / 2 + 90);
     } else if (isGameOver) {
       ctx.fillStyle = 'rgba(0,0,0,0.85)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      ctx.fillStyle = '#e63946';
+      ctx.fillStyle = '#fb5607';
       ctx.textAlign = 'center';
       ctx.font = 'bold 28px "Bungee", sans-serif';
-      ctx.fillText("VIXE, DERRAMOU O QUENTÃO!", canvas.width / 2, canvas.height / 2 - 30);
+      ctx.fillText(t('quentao.overTitle'), canvas.width / 2, canvas.height / 2 - 30);
       
       ctx.fillStyle = '#fefae0';
       ctx.font = '22px Outfit, sans-serif';
       const finalScore = Number((score/60).toFixed(3));
-      ctx.fillText(`Você equilibrou por ${finalScore.toFixed(3)} segundos.`, canvas.width / 2, canvas.height / 2 + 10);
+      ctx.fillText(t('quentao.overResult', {X: finalScore.toFixed(3)}), canvas.width / 2, canvas.height / 2 + 10);
       
       saveScore('quentao', finalScore);
       const hs = getHighScore('quentao');
       
       ctx.fillStyle = "#ffb703";
       ctx.font = "bold 16px 'Courier New'";
-      ctx.fillText(`Recorde: ${Number(hs).toFixed(3)} segundos`, canvas.width / 2, canvas.height / 2 + 40);
+      ctx.fillText(t('quentao.overRecord', {X: Number(hs).toFixed(3)}), canvas.width / 2, canvas.height / 2 + 40);
 
       ctx.fillStyle = '#ffb703';
       ctx.font = 'bold 20px Outfit, sans-serif';
-      ctx.fillText("👆 Clique para tentar de novo", canvas.width / 2, canvas.height / 2 + 80);
+      ctx.fillText(t('quentao.clickRetry'), canvas.width / 2, canvas.height / 2 + 80);
     }
   }
 

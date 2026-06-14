@@ -1,4 +1,5 @@
 import { saveScore, getHighScore } from './ranking.js';
+import { t } from './i18n.js';
 
 export function initPamonhaGame(container) {
   const canvas = document.createElement('canvas');
@@ -251,16 +252,21 @@ export function initPamonhaGame(container) {
       drawGrater(ctx, cornX, Math.max(cornY - cornHeight/2, Math.min(cornY + cornHeight/2, graterY)));
     }
     
-    // Draw UI - Pontos
+    // UI Texts
     ctx.fillStyle = '#fff';
-    ctx.font = '24px "Bungee", sans-serif';
+    ctx.font = 'bold 24px Outfit, sans-serif';
     ctx.textAlign = 'left';
-    ctx.fillText('Pontos: ' + pamonhas, 20, 40);
+    ctx.fillText(t('pamonha.scorePrefix') + pamonhas, 20, 40);
     
-    // Draw Massa Bar (Ponto da Pamonha)
-    ctx.font = 'bold 14px sans-serif';
-    ctx.fillStyle = '#ffca3a';
-    ctx.fillText('PONTO DA MASSA', 20, 75);
+    // Status text
+    ctx.font = '14px Outfit, sans-serif';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+    ctx.fillText(t('pamonha.hudMassa'), 20, 75);
+    
+    ctx.textAlign = 'right';
+    ctx.fillStyle = '#ff006e';
+    ctx.fillText(t('pamonha.hudRalador'), canvas.width - 20, 75);
+    
     ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
     ctx.beginPath(); ctx.roundRect(20, 85, 120, 12, 6); ctx.fill();
     ctx.fillStyle = '#ffca3a';
@@ -268,11 +274,6 @@ export function initPamonhaGame(container) {
     ctx.strokeStyle = '#fff';
     ctx.lineWidth = 2;
     ctx.stroke();
-    
-    // Draw Stress Bar (Gastura do Ralador)
-    ctx.fillStyle = '#e63946';
-    ctx.textAlign = 'right';
-    ctx.fillText('DESGASTE DO RALADOR', canvas.width - 20, 75);
     
     ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
     ctx.beginPath(); ctx.roundRect(canvas.width - 140, 85, 120, 12, 6); ctx.fill();
@@ -293,41 +294,42 @@ export function initPamonhaGame(container) {
       
       ctx.fillStyle = '#ffb703';
       ctx.textAlign = 'center';
-      ctx.font = 'bold 32px "Bungee", sans-serif';
-      ctx.fillText("RALADOR DE PAMONHA", canvas.width / 2, canvas.height / 2 - 40);
+      ctx.font = 'bold 36px "Bungee", sans-serif';
+      ctx.fillText(t('pamonha.title'), canvas.width / 2, canvas.height / 2 - 40);
       
-      ctx.fillStyle = '#fefae0';
+      ctx.fillStyle = '#fff';
       ctx.font = '20px Outfit, sans-serif';
-      ctx.fillText("Arraste para cima e para baixo", canvas.width / 2, canvas.height / 2);
-      ctx.fillText("para ralar o milho o mais rápido que puder!", canvas.width / 2, canvas.height / 2 + 30);
+      ctx.fillText(t('pamonha.desc1'), canvas.width / 2, canvas.height / 2);
+      ctx.fillText(t('pamonha.desc2'), canvas.width / 2, canvas.height / 2 + 30);
       
       ctx.fillStyle = '#ff006e';
-      ctx.font = 'bold 22px Outfit, sans-serif';
-      ctx.fillText("👆 Clique para começar!", canvas.width / 2, canvas.height / 2 + 90);
+      ctx.font = 'bold 24px Outfit, sans-serif';
+      ctx.fillText(t('pamonha.clickStart'), canvas.width / 2, canvas.height / 2 + 90);
     }
     
     if (isGameOver) {
       ctx.fillStyle = 'rgba(0,0,0,0.85)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       
-      ctx.fillStyle = '#e63946';
+      ctx.fillStyle = '#fb5607';
       ctx.textAlign = 'center';
-      ctx.font = 'bold 28px "Bungee", sans-serif';
-      ctx.fillText("VIXE, QUEBROU O RALADOR!", canvas.width / 2, canvas.height / 2 - 30);
+      ctx.font = 'bold 32px "Bungee", sans-serif';
+      ctx.fillText(t('pamonha.overTitle'), canvas.width / 2, canvas.height / 2 - 30);
       
-      ctx.fillStyle = '#fefae0';
-      ctx.font = '22px Outfit, sans-serif';
-      ctx.fillText(`Você fez ${pamonhas} pamonhas.`, canvas.width / 2, canvas.height / 2 + 10);
+      ctx.fillStyle = '#fff';
+      ctx.font = '24px Outfit, sans-serif';
+      ctx.fillText(t('pamonha.overResult', {X: pamonhas}), canvas.width / 2, canvas.height / 2 + 10);
       
       saveScore('pamonha', pamonhas);
       const hs = getHighScore('pamonha');
-      ctx.fillStyle = '#ff006e';
-      ctx.font = '20px "Outfit", sans-serif';
-      ctx.fillText(`Recorde: ${hs} pamonhas`, canvas.width / 2, canvas.height / 2 + 40);
-
-      ctx.fillStyle = '#ffb703';
+      
+      ctx.fillStyle = "#ffb703";
+      ctx.font = "bold 20px 'Courier New'";
+      ctx.fillText(t('pamonha.overRecord', {X: hs}), canvas.width / 2, canvas.height / 2 + 40);
+      
+      ctx.fillStyle = '#fff';
       ctx.font = 'bold 20px Outfit, sans-serif';
-      ctx.fillText("👆 Clique para tentar de novo", canvas.width / 2, canvas.height / 2 + 80);
+      ctx.fillText(t('pamonha.clickRetry'), canvas.width / 2, canvas.height / 2 + 80);
     }
   }
   
