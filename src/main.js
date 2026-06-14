@@ -145,6 +145,7 @@ export function renderHub() {
       if (scores.length === 0) {
         listHtml = `<div class="empty-ranking">${t('ranking.empty')}</div>`;
       } else {
+        listHtml = '<ul class="ranking-list">';
         scores.forEach((s, i) => {
           const displayScore = game.id === 'quentao' ? Number(s).toFixed(3) : s;
           listHtml += `<li><span><span class="ranking-medal">${medals[i]||'🏅'}</span> ${i+1}${t('ranking.place')}</span> <span class="ranking-score">${displayScore} ${game.suffix}</span></li>`;
