@@ -116,7 +116,6 @@ const translations = {
     'quentao.hudAngle': 'Tilt: '
   }
 };
-};
 
 let currentLang = 'pt';
 
