@@ -3,7 +3,7 @@
 Bem-vindo ao **Arraial do Solstício**, uma Festa Junina interativa construída inteiramente com tecnologias web nativas! Este projeto foi criado para a *June Solstice Game Jam* do Dev.to, unindo a temática global do solstício com a nossa riquíssima cultura brasileira.
 
 ## 🎮 Jogue Agora
-(Insira aqui o link do deploy quando fizer, ex: https://seu-usuario.github.io/arraial-do-solsticio)
+[**Clique aqui para jogar online!**](https://filipevieira.github.io/arraial/)
 
 ## ✨ Funcionalidades
 - **Hub Interativo:** Um pátio vivo com fogueira animada, bandeirinhas, e caipiras passeando aleatoriamente pela vila. Tudo embalado com música temática junina!
@@ -11,6 +11,15 @@ Bem-vindo ao **Arraial do Solstício**, uma Festa Junina interativa construída 
 - **Minigame: Ralando a Pamonha 🌽**: Teste sua velocidade no mouse para ralar o milho antes que a barraquinha não aguente o tranco!
 - **Minigame: Equilibrando o Quentão 🍷**: Mantenha o equilíbrio do copo de quentão com movimentos precisos do mouse.
 - **Sistema de Ranking 🏆**: Pontuações locais (via `localStorage`) para você competir com você mesmo e tentar garantir a medalha de Ouro!
+- **Internacionalização (i18n) 🌍**: Detecção automática de idioma pelo navegador e troca em tempo real (sem refresh!) do Português para o Inglês.
+
+## 📸 Screenshots
+<p align="center">
+  <img src="prints/hub.png" width="200" alt="Hub do Arraial">
+  <img src="prints/runner.png" width="200" alt="Pula Fogueira">
+  <img src="prints/pamonha.png" width="200" alt="Ralador de Pamonha">
+  <img src="prints/ranking.png" width="200" alt="Quadro de Medalhas">
+</p>
 
 ## 🛠️ Tecnologias Utilizadas
 - **Vanilla JavaScript**: Toda a lógica de estado, movimentação de personagens, física (no Quentão) e controles. Sem frameworks pesados de jogos.
@@ -22,7 +31,7 @@ Bem-vindo ao **Arraial do Solstício**, uma Festa Junina interativa construída 
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/SEU_USUARIO/arraial-do-solsticio.git
+   git clone https://github.com/filipevieira/arraial.git
    ```
 2. Instale as dependências:
    ```bash
